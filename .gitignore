@@ -1,0 +1,11 @@
+*.mp4
+*.mov
+*.pdf
+*.zip
+*.pptx
+*.docx
+*.xlsx
+.DS_Store
+node_modules/
+.env
+.env.local

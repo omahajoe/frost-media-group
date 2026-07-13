@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frost Media Group — Twenty Years of Nonprofit Storytelling</title>
+<meta name="description" content="For twenty years, Frost Media Group told the stories of nonprofits. That chapter is complete. Here's where the work — and Joseph Mark Frost — continues.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --screen: #0e0e11;
+    --surface: #16161b;
+    --surface-edge: #26262d;
+    --ivory: #ece7db;
+    --ivory-dim: #9a968c;
+    --gold: #c8a24b;
+    --gold-soft: rgba(200, 162, 75, 0.35);
+    --max: 640px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--screen);
+    color: var(--ivory);
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 300;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ---- film grain + projector vignette ---- */
+  .grain {
+    position: fixed;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grain 1.2s steps(4) infinite;
+  }
+  @keyframes grain {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-1.5%, 1%); }
+    50% { transform: translate(1%, -1.5%); }
+    75% { transform: translate(-1%, -1%); }
+    100% { transform: translate(0, 0); }
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 40;
+    background: radial-gradient(ellipse 120% 90% at 50% 40%, transparent 55%, rgba(0,0,0,0.5) 100%);
+  }
+
+  /* ---- shared type roles ---- */
+  .mono {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .mono--dim { color: var(--ivory-dim); }
+
+  /* ---- hero: the end slate ---- */
+  .slate {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 1.5rem;
+    position: relative;
+  }
+  .slate__frame {
+    max-width: 720px;
+    opacity: 0;
+    animation: projector 2.4s ease-out 0.3s forwards;
+  }
+  @keyframes projector {
+    0% { opacity: 0; filter: brightness(2.2) blur(3px); }
+    40% { opacity: 1; filter: brightness(1.4) blur(1px); }
+    100% { opacity: 1; filter: brightness(1) blur(0); }
+  }
+  .slate__timecode {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .slate__timecode::before,
+  .slate__timecode::after {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 1px;
+    background: var(--gold-soft);
+  }
+  h1 {
+    font-family: "Cinzel", serif;
+    font-weight: 500;
+    font-size: clamp(2rem, 7vw, 3.5rem);
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    color: var(--ivory);
+    text-wrap: balance;
+  }
+  .slate__sub {
+    margin-top: 2rem;
+    font-size: clamp(1.0625rem, 2.5vw, 1.25rem);
+    font-style: italic;
+    color: var(--ivory-dim);
+    max-width: 34ch;
+    margin-left: auto;
+    margin-right: auto;
+    text-wrap: balance;
+  }
+  .slate__scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--ivory-dim);
+    text-decoration: none;
+    opacity: 0;
+    animation: fadein 1s ease 2.2s forwards;
+  }
+  .slate__scroll:hover, .slate__scroll:focus-visible { color: var(--gold); }
+  @keyframes fadein { to { opacity: 1; } }
+
+  /* ---- sections ---- */
+  section { padding: 5.5rem 1.5rem; }
+  .inner { max-width: var(--max); margin: 0 auto; }
+
+  .eyebrow {
+    display: block;
+    margin-bottom: 2rem;
+  }
+
+  /* ---- legacy statement ---- */
+  .legacy p + p { margin-top: 1.4em; }
+  .legacy .lede {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--ivory);
+  }
+  .legacy p { color: #c4c0b6; }
+  .legacy strong { font-weight: 500; color: var(--ivory); }
+
+  /* ---- credits: where the work continues ---- */
+  .credits { border-top: 1px solid var(--surface-edge); }
+  .credit {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--surface);
+    border: 1px solid var(--surface-edge);
+    border-radius: 4px;
+    padding: 1.75rem 1.75rem 1.65rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+  }
+  .credit:hover, .credit:focus-visible {
+    border-color: var(--gold-soft);
+    transform: translateY(-2px);
+  }
+  .credit:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  .credit__role { display: block; margin-bottom: 0.6rem; }
+  .credit__name {
+    font-family: "Cinzel", serif;
+    font-weight: 500;
+    font-size: 1.375rem;
+    letter-spacing: 0.04em;
+    color: var(--ivory);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .credit__arrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.875rem;
+    color: var(--gold);
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+  }
+  .credit:hover .credit__arrow { transform: translateX(4px); }
+  .credit__desc {
+    margin-top: 0.5rem;
+    font-size: 0.9375rem;
+    color: var(--ivory-dim);
+    line-height: 1.6;
+  }
+
+  /* ---- nonprofit note ---- */
+  .nonprofit {
+    border-top: 1px solid var(--surface-edge);
+  }
+  .nonprofit blockquote {
+    border-left: 2px solid var(--gold);
+    padding-left: 1.5rem;
+    font-size: clamp(1.125rem, 2.5vw, 1.3125rem);
+    font-style: italic;
+    color: #c4c0b6;
+    line-height: 1.65;
+  }
+  .nonprofit .note {
+    margin-top: 1.75rem;
+    color: var(--ivory-dim);
+    font-size: 0.9875rem;
+  }
+  .nonprofit a { color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold-soft); }
+  .nonprofit a:hover, .nonprofit a:focus-visible { border-bottom-color: var(--gold); }
+
+  /* ---- closing / signature ---- */
+  .close {
+    border-top: 1px solid var(--surface-edge);
+    text-align: center;
+    padding-bottom: 4rem;
+  }
+  .close p {
+    color: #c4c0b6;
+    max-width: 44ch;
+    margin: 0 auto;
+  }
+  .close .sig {
+    margin-top: 2.5rem;
+    font-family: "Cinzel", serif;
+    font-size: 1.25rem;
+    letter-spacing: 0.08em;
+    color: var(--ivory);
+  }
+  .close .sig-title {
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 0 1.5rem 3.5rem;
+  }
+  footer .wrap-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  footer .wrap-line::before, footer .wrap-line::after {
+    content: "";
+    width: 2.5rem;
+    height: 1px;
+    background: var(--surface-edge);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .grain { animation: none; }
+    .slate__frame { animation: none; opacity: 1; }
+    .slate__scroll { animation: none; opacity: 1; }
+    .credit, .credit__arrow { transition: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  @media (max-width: 480px) {
+    section { padding: 4rem 1.25rem; }
+    .credit { padding: 1.4rem 1.25rem; }
+    .credit__name { font-size: 1.1875rem; flex-direction: column; gap: 0.35rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- THE END SLATE -->
+<header class="slate">
+  <div class="slate__frame">
+    <p class="slate__timecode mono">Twenty Years &nbsp;·&nbsp; Final Cut</p>
+    <h1>Frost Media Group</h1>
+    <p class="slate__sub">For twenty years, we told the stories of the people doing good.</p>
+  </div>
+  <a class="slate__scroll mono mono--dim" href="#story" aria-label="Scroll to the story">↓ &nbsp;The story continues</a>
+</header>
+
+<!-- LEGACY STATEMENT -->
+<section id="story" class="legacy">
+  <div class="inner">
+    <span class="eyebrow mono">Reel One — The Legacy</span>
+    <p class="lede">Frost Media Group spent two decades behind the camera for nonprofits — turning missions into stories, and stories into the support that keeps good work alive.</p>
+    <p>Hundreds of productions. Boardrooms, galas, field sites, and living rooms. A book — <strong><em>New Media Habits</em></strong> — a workshop built around it, and an operating system for how mission-driven stories get made.</p>
+    <p>And hiding in plain sight, a lesson that became a thesis: <strong>a film crew is the original decentralized workforce.</strong> Specialists assembled for the project, trusted with their craft, dissolved at the wrap. It wasn't even my first proof — before the cameras, HomeSmartz thrived as a decentralized mortgage brokerage built on the same conviction. Twenty-five years of building this way taught me how work actually wants to be organized — long before the world had names for it.</p>
+    <p>That chapter is complete. The craft and the founder moved into everything that came next: proving that work is decentralizing into fractional leadership, global capacity, and agentic AI. If someone sent you here looking for Frost Media Group, you're in the right place. Here's where the work continues.</p>
+  </div>
+</section>
+
+<!-- CLOSING CREDITS / ROUTING -->
+<section class="credits">
+  <div class="inner">
+    <span class="eyebrow mono">Reel Two — Where the Work Continues</span>
+
+    <a class="credit" href="https://josephmarkfrost.com">
+      <span class="credit__role mono mono--dim">Coaching · Keynotes · Frameworks</span>
+      <span class="credit__name">Joseph Mark Frost <span class="credit__arrow">→</span></span>
+      <span class="credit__desc">Growth creator for visionary founders — coaching, speaking, and the thinking behind them. If a friend told you to "call Frost," this is who they meant.</span>
+    </a>
+
+    <a class="credit" href="https://yorcmo.com">
+      <span class="credit__role mono mono--dim">Fractional Marketing Leadership</span>
+      <span class="credit__name">yorCMO <span class="credit__arrow">→</span></span>
+      <span class="credit__desc">Executive marketing leadership, fractional by design — proof that the decentralized C-suite works at franchise scale.</span>
+    </a>
+
+    <a class="credit" href="https://guidedoutsourcing.com">
+      <span class="credit__role mono mono--dim">Global Capacity &amp; Teams</span>
+      <span class="credit__name">Guided Outsourcing <span class="credit__arrow">→</span></span>
+      <span class="credit__desc">Skilled global teams, built and guided the right way. Connecting people globally, changing lives locally.</span>
+    </a>
+  </div>
+</section>
+
+<!-- NONPROFIT NOTE -->
+<section class="nonprofit">
+  <div class="inner">
+    <span class="eyebrow mono">Reel Three — For Our Nonprofit Friends</span>
+    <blockquote>The nonprofit community gave Frost Media Group its purpose. Twenty years of storytelling for your missions shaped everything I build today — and that door is not closed.</blockquote>
+    <p class="note">If you're a nonprofit leader with a story to tell or a question to ask, reach me directly at <a href="mailto:joe@josephmarkfrost.com">joe@josephmarkfrost.com</a>. I still take those calls.</p>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="close">
+  <div class="inner">
+    <span class="eyebrow mono">Fin</span>
+    <p>Every good film knows when to roll credits. Thank you to every nonprofit, every client, and every crew member who was part of this production.</p>
+    <p style="margin-top: 1.4em; font-style: italic;">The next production is already underway: work is decentralizing — and I'm building the companies, frameworks, and leaders proving it.</p>
+    <p class="sig">Joseph Mark Frost</p>
+    <span class="sig-title mono mono--dim">Founder, Frost Media Group</span>
+  </div>
+</section>
+
+<footer>
+  <p class="wrap-line mono mono--dim">That's a wrap</p>
+  <p class="mono mono--dim" style="letter-spacing: 0.16em;">Frost Media Group · Omaha, Nebraska</p>
+</footer>
+
+</body>
+</html>
